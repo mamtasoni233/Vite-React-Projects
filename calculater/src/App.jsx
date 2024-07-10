@@ -1,14 +1,14 @@
 import styles from './App.module.css'
+import ButtonContainer from './components/ButtonContainer'
+import Display from './components/Display'
 
 function App() {
   return (
     <div id='calculater' className={` ${styles.calculater}`}>
-      <input type="text" name="display" id="display" className={` ${styles.display}`} />
-      <div id="button" className={` ${styles.btnContainer}`} >
-        <button id="clear" onClick={() => { }}>C</button>
-        <button id="clear" onClick={() => { }}>C</button>
-        <button id="clear" onClick={() => { }}>C</button>
-      </div>
+      <Display />
+      <ButtonContainer />
+
+
     </div>
   )
 }
