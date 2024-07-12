@@ -24,12 +24,22 @@ export const todoSlice = createSlice({
       //   state.todos.findIndex((todo) => todo.id !== action.payload);
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
     },
-    changeTodo: (state, action) => {
-      state.todos.find((todo) => todo.id === action.payload.id).textVal =
-        action.payload;
+    /* editTodo: (state, action) => {
+      //   state.todos.filter((todo) => todo.id === action.payload);
+      const todoEdit = state.todos.find((todo) => todo.id === action.payload);
+      const updateTodo = {
+        // todoEdit,
+        textVal: action.payload,
+      };
+    }, */
+    updateTodo: (state, action) => {
+      let { todos } = state;
+      state.todos = todos.map((item) =>
+        item.id === action.payload.id ? action.payload : item
+      );
     },
   },
 });
 
-export const { addTodo, removeTodo, changeTodo } = todoSlice.actions;
+export const { addTodo, removeTodo, updateTodo } = todoSlice.actions;
 export default todoSlice.reducer;
