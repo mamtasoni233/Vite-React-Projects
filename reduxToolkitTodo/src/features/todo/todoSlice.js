@@ -24,20 +24,41 @@ export const todoSlice = createSlice({
       //   state.todos.findIndex((todo) => todo.id !== action.payload);
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
     },
-    /* editTodo: (state, action) => {
-      //   state.todos.filter((todo) => todo.id === action.payload);
-      const todoEdit = state.todos.find((todo) => todo.id === action.payload);
-      const updateTodo = {
-        // todoEdit,
-        textVal: action.payload,
-      };
-    }, */
     updateTodo: (state, action) => {
-      let { todos } = state;
-      state.todos = todos.map((item) =>
-        item.id === action.payload.id ? action.payload : item
-      );
+      const { id, textVal } = action.payload;
+      const todo = state.todos.find((todo) => todo.id === id);
+      if (todo) {
+        todo.textVal = textVal;
+      }
     },
+    // updateTodo: (state, action) => {
+    //   // let { todos } = state;
+    //   // state.todos = todos.map((item) =>
+    //   //   item.id === action.payload.id ? action.payload : item
+    //   // );
+    //   // let { todos } = state;
+    //   // return todos.map((todo) => {
+    //   //   const item = todo.item;
+    //   //   if (todo.id === action.payload.id) {
+    //   //     return {
+    //   //       ...todo,
+    //   //       [item]: action.payload.textVal,
+    //   //     };
+    //   //   }
+    //   //   return todo;
+    //   // });
+    //   /* state.todos = state.todos.map((todo) => {
+    //     if (todo.id === action.payload.id) {
+    //       return {
+    //         ...todo,
+    //         textVal: action.payload.textVal,
+    //       };
+    //     }
+    //     return todo;
+    //   }); */
+    //   state.todos = state.todos.filter((todo) => todo.id === action.payload);
+    //   console.log('state.todos', state.todos);
+    // },
   },
 });
 

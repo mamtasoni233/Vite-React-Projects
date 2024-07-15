@@ -1,9 +1,23 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { removeTodo, updateTodo } from '../features/todo/todoSlice'
+import { useState } from 'react'
 
 export default function Todos() {
     const todos = useSelector(state => state.todos)
     const dispatch = useDispatch()
+    const [editableTodoId, setEditableTodoId] = useState(null)
+    const [editText, setEditText] = useState('')
+
+    const handleEditClick = (todo) => {
+        setEditableTodoId(todo.id)
+        setEditText(todo.textVal)
+    }
+
+    const handleSaveClick = (id) => {
+        dispatch(updateTodo({ id, textVal: editText }))
+        setEditableTodoId(null)
+    }
+
     return (
         <>
             <div>Todos</div>
@@ -13,14 +27,33 @@ export default function Todos() {
                         className="mt-4 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"
                         key={todo.id}
                     >
-                        <div className='text-white'>{todo.textVal}</div>
-                        <div className='flex flex-wrap justify-between'>
-                            <button
-                                className="text-white bg-green-500 border-0 py-1 px-4 mx-2 focus:outline-none hover:bg-green-600 rounded text-md"
-                                onClick={() => { dispatch(updateTodo(todo.id, todo.textVal)) }}
-                            >
-                                {"✏️"}
-                            </button>
+                        {editableTodoId === todo.id ? (
+                            <input
+                                type="text"
+                                className="text-white border outline-none w-full bg-transparent rounded-lg border-white/10 px-2"
+                                value={editText}
+                                onChange={(e) => setEditText(e.target.value)}
+                            />
+                        ) : (
+                            <div className='text-white'>{todo.textVal}</div>
+                        )}
+
+                        <div className='flex justify-between'>
+                            {editableTodoId === todo.id ? (
+                                <button
+                                    className="text-white bg-green-500 border-0 py-1 px-4 mx-2 focus:outline-none hover:bg-green-600 rounded text-md"
+                                    onClick={() => handleSaveClick(todo.id)}
+                                >
+                                    Save
+                                </button>
+                            ) : (
+                                <button
+                                    className="text-white bg-green-500 border-0 py-1 px-4 mx-2 focus:outline-none hover:bg-green-600 rounded text-md"
+                                    onClick={() => handleEditClick(todo)}
+                                >
+                                    ✏️
+                                </button>
+                            )}
                             <button
                                 onClick={() => dispatch(removeTodo(todo.id))}
                                 className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
@@ -43,7 +76,7 @@ export default function Todos() {
                         </div>
                     </li>
                 ))}
-            </ul >
+            </ul>
         </>
     )
 }
