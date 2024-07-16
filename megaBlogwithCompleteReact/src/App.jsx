@@ -1,15 +1,17 @@
+import './App.css'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import authSecive from './appwrite/authService'
 import { useEffect } from 'react'
 import { login, logout } from './store/authSlice'
 import { Footer, Header } from './components'
-import { Outlet, Route, BrowserRouter, Routes } from 'react-router-dom';
+import { Outlet } from 'react-router-dom'
 
 
 function App() {
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch();
+
   useEffect(() => {
     authSecive.getCurrentUser()
       .then((userData) => {
@@ -28,7 +30,7 @@ function App() {
         <div className='w-full block'>
           <Header />
           <main>
-            TODO : {/* <Outlet /> */}
+            TODO:  <Outlet />
           </main>
           <Footer />
         </div>
