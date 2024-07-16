@@ -26,29 +26,9 @@ npm i @tinymce/tinymce-react
 npm install html-react-parser --save
 npm install react-hook-form
 
-## add normal tailwind css in react app
-
-1.  npm install -D tailwindcss
-2.  npx tailwindcss init
-3.  add configuration in config file
-    -- /** @type {import('tailwindcss').Config} \*/
-    module.exports = {
-    content: [
-    "./src/**/\*.{js,jsx,ts,tsx}",
-    ],
-    theme: {
-    extend: {},
-    },
-    plugins: [],
-    }
-4.  add tailwind directory in indexedDB.css file
-    -- @tailwind base;
-    -- @tailwind components;
-    -- @tailwind utilities;
-
 ### Tailwind css with vite config
 
-wo we used with vite config tailwind css
+so we used with vite config tailwind css
 
 1.  npm install -D tailwindcss postcss autoprefixer
 2.  npx tailwindcss init -p
@@ -68,6 +48,26 @@ wo we used with vite config tailwind css
     @tailwind base;
     @tailwind components;
     @tailwind utilities;
+
+## add normal tailwind css in react app
+
+1.  npm install -D tailwindcss
+2.  npx tailwindcss init
+3.  add configuration in config file
+    -- /** @type {import('tailwindcss').Config} \*/
+    module.exports = {
+    content: [
+    "./src/**/\*.{js,jsx,ts,tsx}",
+    ],
+    theme: {
+    extend: {},
+    },
+    plugins: [],
+    }
+4.  add tailwind directory in indexedDB.css file
+    -- @tailwind base;
+    -- @tailwind components;
+    -- @tailwind utilities;
 
 ## add font awsome in react app
 
