@@ -4,6 +4,8 @@ import authSecive from './appwrite/authService'
 import { useEffect } from 'react'
 import { login, logout } from './store/authSlice'
 import { Footer, Header } from './components'
+import { Outlet, Route, BrowserRouter, Routes } from 'react-router-dom';
+
 
 function App() {
   const [loading, setLoading] = useState(true)
