@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { Outlet, Route, BrowserRouter, Routes } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 export default function AuthLayout({ children, authentication = true }) {
 
-    const [loader, setLoader] = useState(true);
-    const [auth, setAuth] = useState(false);
+    const navigate = useNavigate()
+    const [loader, setLoader] = useState(true)
     const authStatus = useSelector(state => state.auth.status)
-    const navigate = useNavigate();
+
     useEffect(() => {
         //TODO: make it more easy to understand
 
@@ -19,10 +17,11 @@ export default function AuthLayout({ children, authentication = true }) {
         // }
 
         //let authValue = authStatus === true ? true : false
+
         if (authentication && authStatus !== authentication) {
-            navigate('/login')
+            navigate("/login")
         } else if (!authentication && authStatus !== authentication) {
-            navigate('/login')
+            navigate("/")
         }
         setLoader(false)
     }, [authStatus, navigate, authentication])
